@@ -2,7 +2,7 @@
 
 namespace Conduit.Infrastructure.CLParser.Favorites
 {
-    [Verb("add-favorite")]
+    [Verb("add-favorite", HelpText = "Like an article")]
     public class AddFavoriteOption
     {
         [Option("username", Required = true)]
@@ -12,7 +12,7 @@ namespace Conduit.Infrastructure.CLParser.Favorites
         public string Slug { get; set; }
     }
 
-    [Verb("delete-favorite")]
+    [Verb("delete-favorite", HelpText = "Unlike an article")]
     public class DeleteFavoriteOption
     {
         [Option("username", Required = true)]

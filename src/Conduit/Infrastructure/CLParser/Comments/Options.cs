@@ -2,7 +2,7 @@
 
 namespace Conduit.Infrastructure.CLParser.Comments
 {
-    [Verb("create-comment")]
+    [Verb("create-comment", HelpText = "Add new comment")]
     public class CreateCommentOption
     {
         [Option("username", Required = true)]
@@ -18,14 +18,14 @@ namespace Conduit.Infrastructure.CLParser.Comments
         }
     }
 
-    [Verb("list-comments")]
+    [Verb("list-comments", HelpText = "List all comment of slug")]
     public class ListCommentsOption
     {
         [Option("slug", Required = true)]
         public string Slug { get; set; }
     }
 
-    [Verb("delete-comment")]
+    [Verb("delete-comment", HelpText = "Delete a comment")]
     public class DeleteCommentOption
     {
         [Option("slug", Required = true)]

@@ -11,6 +11,7 @@ using Conduit.Infrastructure.CLParser.Tags;
 using Conduit.Infrastructure.CLParser.Users;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+// ReSharper disable LocalizableElement
 
 namespace Conduit.Infrastructure
 {
@@ -84,7 +85,6 @@ namespace Conduit.Infrastructure
         }
         public void Run()
         {
-            // ReSharper disable once LocalizableElement
 #if DEBUG
             Console.WriteLine("RUNNING COMMAND LINE HANDLER");
 #endif
@@ -118,14 +118,14 @@ namespace Conduit.Infrastructure
                 // If parse error
                 .WithNotParsed(error =>
                 {
-                    Console.WriteLine("Error parsing command line: ");
-                    Console.WriteLine(JsonConvert.SerializeObject(error, Formatting.Indented));
+//                    Console.WriteLine("Error parsing command line: ");
+//                    Console.WriteLine(JsonConvert.SerializeObject(error, Formatting.Indented));
                 });
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            Run();
+            if (_args.Length != 0 ) Run();
             return Task.CompletedTask;
         }
 

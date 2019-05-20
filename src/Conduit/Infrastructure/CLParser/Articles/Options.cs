@@ -2,10 +2,10 @@
 using CommandLine;
 namespace Conduit.Infrastructure.CLParser.Articles
 {
-    [Verb("list-articles")]
+    [Verb("list-articles", HelpText = "Get all article from website")]
     public class ListArticlesOption { }
 
-    [Verb("create-article")]
+    [Verb("create-article", HelpText = "Create new article")]
     public class CreateArticleOption
     {
         [Option("title", Required = true)]
@@ -25,7 +25,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
 
     }
 
-    [Verb("get-articles")]
+    [Verb("get-articles", HelpText = "Get special articles")]
     public class GetArticlesOption
     {
         [Option("tag")]
@@ -47,7 +47,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
         public bool IsFeed { get; set; }
     }
 
-    [Verb("get-article")]
+    [Verb("get-article", HelpText = "Get special article by slug")]
     public class GetArticleOption
     {
         [Option("slug")]
@@ -55,7 +55,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
     }
 
 
-    [Verb("edit-article")]
+    [Verb("edit-article", HelpText = "Edit the article")]
     public class EditArticleOption
     {
         [Option("slug")]
@@ -75,7 +75,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
 
     }
 
-    [Verb("delete-article")]
+    [Verb("delete-article", HelpText = "Delete article")]
     public class DeleteArticleOption
     {
         [Option("slug")]

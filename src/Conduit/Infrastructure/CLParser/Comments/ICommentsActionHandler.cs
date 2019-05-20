@@ -2,13 +2,13 @@
 {
     public interface ICommentsActionHandler
     {
-        // create-comment
+        // add comment: create-comment --username="" --body="" --slug=""
         int CreateComment(CreateCommentOption opt);
 
-        // list-comments
+        // get comments: list-comments --slug=""
         int ListComments(ListCommentsOption opt);
 
-        // delete-comment
+        // remove comment: delete-comment --slug="" --id=
         int DeleteComment(DeleteCommentOption opt);
     }
 }

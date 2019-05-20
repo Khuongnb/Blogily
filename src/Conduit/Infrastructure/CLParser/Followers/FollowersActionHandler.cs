@@ -41,7 +41,7 @@ namespace Conduit.Infrastructure.CLParser.Followers
                 _helper.Username = opt.Username;
                 var command = new Delete.Command(opt.TargetUsername);
                 var res = _helper.SendAsync(command);
-                _helper.PrintResult(res, successed: "User " + opt.Username + " now following user " + opt.TargetUsername);
+                _helper.PrintResult(res, successed: "User " + opt.Username + " unfollow " + opt.TargetUsername);
             }
             catch (UserNotFoundException exception)
             {

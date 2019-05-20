@@ -2,7 +2,7 @@
 
 namespace Conduit.Infrastructure.CLParser.Followers
 {
-    [Verb("follow")]
+    [Verb("follow", HelpText = "Follow a user")]
     public class FollowOption
     {
         [Option("username", Required = true)]
@@ -12,7 +12,7 @@ namespace Conduit.Infrastructure.CLParser.Followers
         public string TargetUsername { get; set; }
     }
 
-    [Verb("unfollow")]
+    [Verb("unfollow", HelpText = "Unfollow a user")]
     public class UnfollowOption
     {
         [Option("username", Required = true)]

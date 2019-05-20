@@ -54,7 +54,7 @@ namespace Conduit.Infrastructure.CLParser.Comments
         {
             var command = new Delete.Command(opt.Slug, opt.Id);
             var res = _helper.SendAsync(command);
-            _helper.PrintResult(res, successed: "Command " + opt.Id + " deleted.");
+            _helper.PrintResult(res, successed: "Comment " + opt.Id + " deleted.");
             return 1;
         }
     }

@@ -5,7 +5,7 @@ using CommandLine;
 
 namespace Conduit.Infrastructure.CLParser.Users
 {
-    [Verb("create-user")]
+    [Verb("create-user", HelpText = "Create new user")]
     public class CreateUserOption
     {
         [Option("email", Required = true)]
@@ -18,7 +18,7 @@ namespace Conduit.Infrastructure.CLParser.Users
         public string Username { get; set; }
     }
 
-    [Verb("login")]
+    [Verb("login", HelpText = "Login")]
     public class LoginOption
     {
         [Option("email", Required = true)]
@@ -28,14 +28,14 @@ namespace Conduit.Infrastructure.CLParser.Users
         public string Password { get; set; }
     }
 
-    [Verb("get-user")]
+    [Verb("get-user", HelpText = "Get user by username")]
     public class GetUserOption
     {
         [Option("username", Required = true)]
         public string Username { get; set; }
     }
 
-    [Verb("update-user")]
+    [Verb("update-user", HelpText = "Update user profile")]
     public class UpdateUserOption
     {
         [Option("username", Required = true)]

@@ -17,7 +17,7 @@
     },
     "RealWorld": {
       "commandName": "Project",
-      "commandLineArgs": "list-tags"
+      "commandLineArgs": "--help"
     }
   }
 }
