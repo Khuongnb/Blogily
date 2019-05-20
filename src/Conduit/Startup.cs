@@ -17,8 +17,14 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Conduit.Features.Articles;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Conduit.Infrastructure.CLParser;
+using Conduit.Infrastructure.CLParser.Articles;
+using Conduit.Infrastructure.CLParser.Comments;
+using Conduit.Infrastructure.CLParser.Favorites;
+using Conduit.Infrastructure.CLParser.Followers;
+using Conduit.Infrastructure.CLParser.Profiles;
+using Conduit.Infrastructure.CLParser.Tags;
+using Conduit.Infrastructure.CLParser.Users;
 using Microsoft.Extensions.Hosting;
 // ReSharper disable InconsistentNaming
 
@@ -30,7 +36,6 @@ namespace Conduit
         public const string DEFAULT_DATABASE_PROVIDER = "sqlite";
 
         private static IConfiguration _config;
-
         public Action<IConfigurationBuilder> AppConfig = AppConfiguration;
         public Action<IServiceCollection> StaticServicesConfig = ConfigureServices;
 
@@ -51,7 +56,14 @@ namespace Conduit
             services.AddMediatR();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(DBContextTransactionPipelineBehavior<,>));
-            services.AddScoped(typeof(ICommandLineHandler), typeof(CommandLineHandler));
+            services.AddScoped(typeof(IActionHelper), typeof(ActionHelper));
+            services.AddScoped(typeof(IUsersActionHandler), typeof(UsersActionHandler));
+            services.AddScoped(typeof(IArticlesActionHandler), typeof(ArticlesActionHandler));
+            services.AddScoped(typeof(ICommentsActionHandler), typeof(CommentsActionHandler));
+            services.AddScoped(typeof(IFavoritesActionHandler), typeof(FavoritesActionHandler));
+            services.AddScoped(typeof(IFollowersActionHandler), typeof(FollowersActionHandler));
+            services.AddScoped(typeof(IProfilesActionHandler), typeof(ProfilesActionHandler));
+            services.AddScoped(typeof(ITagsActionHandler), typeof(TagsActionHandler));
 
             // take the connection string from the environment variable or use hard-coded database name
             var connectionString = _config.GetValue<string>("ASPNETCORE_Conduit_ConnectionString") ??
@@ -125,7 +137,7 @@ namespace Conduit
 
 
             // Running service
-            services.AddSingleton<IHostedService, CommandLineHandler>();
+            services.AddSingleton<IHostedService, CommandLineExecuting>();
 
         }
 
@@ -158,7 +170,7 @@ namespace Conduit
 //            });
 
             app.ApplicationServices.GetRequiredService<ConduitContext>().Database.EnsureCreated();
-            app.ApplicationServices.GetService<ICommandLineHandler>().Run();
+            app.ApplicationServices.GetService<ICommandLineExecuting>().Run();
 
         }
     }

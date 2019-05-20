@@ -5,9 +5,8 @@ using Conduit.Infrastructure.CLParser;
 
 namespace Conduit.Infrastructure
 {
-    interface ICommandLineHandler
+    interface ICommandLineExecuting
     {
         void Run();
-        ActionHelper GetHelper();
     }
 }

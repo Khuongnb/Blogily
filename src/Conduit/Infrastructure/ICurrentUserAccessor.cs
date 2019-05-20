@@ -3,6 +3,5 @@
     public interface ICurrentUserAccessor
     {
         string GetCurrentUsername();
-        void Print();
     }
 }

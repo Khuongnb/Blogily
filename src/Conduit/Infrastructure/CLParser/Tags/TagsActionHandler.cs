@@ -1,29 +1,22 @@
 ﻿using System;
+using Conduit.Features.Tags;
 using Conduit.Features.Users;
 using MediatR;
 
 namespace Conduit.Infrastructure.CLParser.Tags
 {
-    public class UserData
+    class TagsActionHandler: ITagsActionHandler
     {
-        public string Username { get; set; }
-
-        public string Email { get; set; }
-
-        public string Password { get; set; }
-    }
-    class TagsActionHandler
-    {
-        private readonly IMediator _mediator;
-        public TagsActionHandler(IMediator mediator)
+        private readonly IActionHelper _helper;
+        public TagsActionHandler(IActionHelper helper)
         {
-            _mediator = mediator;
+            _helper = helper;
         }
 
         public int ListTags(ListTagsOption option)
         {
-
-            
+            var res = _helper.SendAsync(new List.Query());
+            _helper.PrintResult(res);
             return 1;
         }
     }

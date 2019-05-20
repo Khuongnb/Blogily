@@ -3,7 +3,7 @@
 namespace Conduit.Infrastructure.CLParser.Tags
 {
     [Verb("list-tags")]
-    class ListTagsOption
+    public class ListTagsOption
     {
     }
 }

@@ -61,7 +61,6 @@ namespace Conduit.Features.Articles
             public async Task<ArticleEnvelope> Handle(Command message, CancellationToken cancellationToken)
             {
                 var author = await _context.Persons.FirstAsync(x => x.Username == _currentUserAccessor.GetCurrentUsername(), cancellationToken);
-                Console.WriteLine("Author: ", author);
                 var tags = new List<Tag>();
                 foreach (var tag in (message.Article.TagList ?? Enumerable.Empty<string>()))
                 {
