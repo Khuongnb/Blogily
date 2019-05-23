@@ -78,6 +78,8 @@ namespace Conduit.Features.Articles
                     tags.Add(t);
                 }
 
+                var uniqSlug = message.Article.Title.GenerateSlug() + "-" + Guid.NewGuid().ToString().Substring(0, 8);
+
                 var article = new Article()
                 {
                     Author = author,
@@ -86,7 +88,7 @@ namespace Conduit.Features.Articles
                     UpdatedAt = DateTime.UtcNow,
                     Description = message.Article.Description,
                     Title = message.Article.Title,
-                    Slug = message.Article.Title.GenerateSlug()
+                    Slug = uniqSlug
                 };
                 await _context.Articles.AddAsync(article, cancellationToken);
 
