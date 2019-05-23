@@ -17,7 +17,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
         [Option("body")]
         public string Body { get; set; }
 
-        [Option("tag-list")]
+        [Option("tag-list", Separator = ',')]
         public IEnumerable<string> Tags { get; set; }
 
         [Option("username", Required = true)]
