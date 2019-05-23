@@ -22,7 +22,7 @@ namespace Conduit.Infrastructure.CLParser.Articles
         // TODO: Fix slug generator
         int EditArticle(EditArticleOption opt);
 
-        // Delete article
+        // Delete article: delete-article --slug=""
         // TODO: Fix slug gerenator
         int DeleteArticle(DeleteArticleOption opt);
 

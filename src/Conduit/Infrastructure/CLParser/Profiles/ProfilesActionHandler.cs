@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Conduit.Features.Profiles;
+using Conduit.Infrastructure.Errors;
 using MediatR;
 
 namespace Conduit.Infrastructure.CLParser.Profiles
@@ -17,9 +18,21 @@ namespace Conduit.Infrastructure.CLParser.Profiles
 
         public int GetProfile(GetProfileOption opt)
         {
+            if (opt.Username != "")
+            { 
+                try
+                {
+                    _helper.Username = opt.Username;
+                }
+                catch (UserNotFoundException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
             var query = new Details.Query()
             {
-                Username = opt.Username
+                Username = opt.TargetUser
             };
 
             var res = _helper.SendAsync(query);

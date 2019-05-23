@@ -38,6 +38,7 @@ namespace Conduit
         private static IConfiguration _config;
         public Action<IConfigurationBuilder> AppConfig = AppConfiguration;
         public Action<IServiceCollection> StaticServicesConfig = ConfigureServices;
+        public Action<HostBuilderContext, ILoggingBuilder> RuntimeConfigure = Configure;
 
         private static void AppConfiguration(IConfigurationBuilder configuration)
         {
@@ -51,7 +52,7 @@ namespace Conduit
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        private static void ConfigureServices(IServiceCollection services)
+        public static void ConfigureServices(IServiceCollection services)
         {
             services.AddMediatR();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
@@ -136,41 +137,17 @@ namespace Conduit
             services.AddJwt();
 
 
-            // Running service
+            // Willing to run service
             services.AddSingleton<IHostedService, CommandLineExecuting>();
 
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app)
+        public static void Configure(HostBuilderContext context, ILoggingBuilder builder)
         {
 
-//            loggerFactory.AddSerilogLogging();
-//
-//            app.UseMiddleware<ErrorHandlingMiddleware>();
-//
-//            app.UseCors(builder =>
-//                builder
-//                    .AllowAnyOrigin()
-//                    .AllowAnyHeader()
-//                    .AllowAnyMethod());
-//
-//            app.UseMvc();
-//
-//            // Enable middleware to serve generated Swagger as a JSON endpoint
-//            app.UseSwagger(c =>
-//            {
-//                c.RouteTemplate = "swagger/{documentName}/swagger.json";
-//            });
-//
-//            // Enable middleware to serve swagger-ui assets(HTML, JS, CSS etc.)
-//            app.UseSwaggerUI(x =>
-//            {
-//                x.SwaggerEndpoint("/swagger/v1/swagger.json", "RealWorld API V1");
-//            });
-
-            app.ApplicationServices.GetRequiredService<ConduitContext>().Database.EnsureCreated();
-            app.ApplicationServices.GetService<ICommandLineExecuting>().Run();
+            builder.Services.BuildServiceProvider().GetRequiredService<ConduitContext>().Database.EnsureCreated();
 
         }
     }

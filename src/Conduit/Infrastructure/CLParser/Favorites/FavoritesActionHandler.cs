@@ -20,6 +20,7 @@ namespace Conduit.Infrastructure.CLParser.Favorites
         {
             try
             {
+                _helper.Username = opt.Username;
                 var command = new Add.Command(opt.Slug);
                 var res = _helper.SendAsync(command);
                 _helper.PrintResult(res, successed: "Favorited.!");
@@ -36,6 +37,7 @@ namespace Conduit.Infrastructure.CLParser.Favorites
         {
             try
             {
+                _helper.Username = opt.Username;
                 var command = new Delete.Command(opt.Slug);
                 var res = _helper.SendAsync(command);
                 _helper.PrintResult(res, successed: "Favorited.!");

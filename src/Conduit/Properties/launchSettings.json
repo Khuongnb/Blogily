@@ -17,7 +17,7 @@
     },
     "RealWorld": {
       "commandName": "Project",
-      "commandLineArgs": "--help"
+      "commandLineArgs": "create-article --title=\"title3\" --description=\"des\" --body=\"body\" --tag-list=\"tag1\",\"tag2\" --username=\"username\""
     }
   }
 }

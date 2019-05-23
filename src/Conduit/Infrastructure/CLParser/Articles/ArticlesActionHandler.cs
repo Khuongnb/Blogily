@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Conduit.Features.Articles;
+using Conduit.Infrastructure.Errors;
 
 namespace Conduit.Infrastructure.CLParser.Articles
 {
@@ -24,21 +26,28 @@ namespace Conduit.Infrastructure.CLParser.Articles
 
         public int CreateArticle(CreateArticleOption article)
         {
-            _helper.Username = article.Username;
-            var command = new Create.Command()
+            try
             {
-                Article = new Create.ArticleData()
+                _helper.Username = article.Username;
+                var command = new Create.Command()
                 {
-                    Title = article.Title,
-                    Description = article.Description,
-                    Body = article.Body,
-                    TagList = article.Tags.ToArray()
-                }
-            };
+                    Article = new Create.ArticleData()
+                    {
+                        Title = article.Title,
+                        Description = article.Description,
+                        Body = article.Body,
+                        TagList = article.Tags.ToArray()
+                    }
+                };
 
-            var res = _helper.SendAsync(command);
+                var res = _helper.SendAsync(command);
 
-            _helper.PrintResult(res, successed: article.Title + " article created.");
+                _helper.PrintResult(res, successed: article.Title + " article created.");
+            }
+            catch (UserNotFoundException exception)
+            {
+                Console.WriteLine(exception);
+            }
             return 0;
         }
 
