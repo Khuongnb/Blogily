@@ -14,15 +14,6 @@ Task("Build")
     DotNetCoreBuild(".");
 });
 
-Task("Test")
-  .Does(() =>
-{
-    var files = GetFiles("tests/**/*.csproj");
-    foreach(var file in files)
-    {
-        DotNetCoreTest(file.ToString());
-    }
-});
 
 Task("Publish")
   .Does(() =>
@@ -60,7 +51,6 @@ Task("Clean")
 Task("Default")
     .IsDependentOn("Restore")
     .IsDependentOn("Build")
-    .IsDependentOn("Test")
     .IsDependentOn("Publish");
 
  Task("Rebuild")
